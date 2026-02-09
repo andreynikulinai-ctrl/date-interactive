@@ -717,6 +717,24 @@ html, body {
     line-height: 1.6;
 }
 
+@media (max-width: 768px) {
+    #screen-route {
+        align-items: flex-start;
+        padding-top: var(--spacing-lg);
+        padding-bottom: var(--spacing-lg);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .route-content {
+        max-width: 100%;
+    }
+
+    .route-card {
+        padding: var(--spacing-md);
+    }
+}
+
 /* ========== SCREEN 7: REACTION ========== */
 .reaction-content {
     text-align: center;
@@ -1075,6 +1093,10 @@ html, body {
         min-height: 100%;
         transform: translate(-50%, -50%) scale(0.9);
         opacity: 0.25;
+    }
+    .route-bg-animation.route-bg-light {
+        object-position: center 20%;
+        transform: translate(-50%, -50%) scale(0.8);
     }
     .sceneVideo {
         background: #000;
