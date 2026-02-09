@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14 февраля</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Overlay layers -->
+    <div id="grain"></div>
+    <div id="vignette"></div>
+    <div id="progressBar"><div id="progressFill"></div></div>
+    <div id="cursorGlow"></div>
+    <div id="lightWipe"></div>
+    
+    <canvas id="particles"></canvas>
+    
+    <!-- SCREEN 0: PRELOAD -->
+    <section id="screen-preload" class="screen active">
+        <div class="preload-content">
+            <p class="preload-text line-1">Подожди секунду</p>
+            <p class="preload-text line-2">Я кое-что придумал</p>
+            <div class="preload-spinner"></div>
+        </div>
+    </section>
+
+    <!-- SCREEN 1: INTRO -->
+    <section id="screen-intro" class="screen">
+        <div class="intro-content">
+            <p class="intro-line line-1">Три варианта для встречи</p>
+            <p class="intro-line line-2">Посмотри и выбери тот, который нравится</p>
+            <button class="btn-primary" id="btn-start">Начать</button>
+        </div>
+    </section>
+
+    <!-- SCREEN 2: WEATHER -->
+    <section id="screen-weather" class="screen">
+        <div class="weather-widget">
+            <div class="weather-header">
+                <h3>Санкт-Петербург</h3>
+                <p class="weather-date">14 февраля, суббота</p>
+            </div>
+            <div class="weather-main">
+                <div class="weather-temp">−10°</div>
+                <div class="weather-desc">Облачно с прояснениями</div>
+            </div>
+            <div class="weather-details">
+                <div class="weather-detail">
+                    <span class="detail-label">Днём</span>
+                    <span class="detail-value">−1°</span>
+                </div>
+                <div class="weather-detail">
+                    <span class="detail-label">Вечером</span>
+                    <span class="detail-value">−7°</span>
+                </div>
+                <div class="weather-detail">
+                    <span class="detail-label">Ветер</span>
+                    <span class="detail-value">3–6 м/с</span>
+                </div>
+            </div>
+            <button class="btn-primary" id="btn-weather-next">Дальше</button>
+        </div>
+    </section>
+
+    <!-- SCREEN 3: MOOD SELECTION -->
+    <section id="screen-mood" class="screen">
+        <div class="mood-container">
+            <div class="mood-zone" data-mood="silence">
+                <div class="mood-bg"></div>
+                <h2 class="mood-title">Тишина</h2>
+            </div>
+            <div class="mood-zone" data-mood="movement">
+                <div class="mood-bg"></div>
+                <h2 class="mood-title">Движение</h2>
+            </div>
+            <div class="mood-zone" data-mood="light">
+                <div class="mood-bg"></div>
+                <h2 class="mood-title">Свет</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCREEN 4: STORY (dynamic) -->
+    <section id="screen-story" class="screen">
+        <div class="story-content">
+            <div class="story-animation-bg" id="story-animation"></div>
+            <p class="story-text" id="story-text"></p>
+            <button class="btn-primary" id="btn-story-next">Дальше</button>
+        </div>
+    </section>
+
+    <!-- SCREEN 5: ROUTE REVEAL -->
+    <section id="screen-route" class="screen">
+        <div class="route-content">
+            <div class="route-animation-bg" id="route-animation"></div>
+            <div class="route-card">
+                <div class="route-badge" id="route-badge"></div>
+                <div class="route-path" id="route-path"></div>
+                <div class="route-details" id="route-details"></div>
+            </div>
+            <button class="btn-primary" id="btn-route-next">Дальше</button>
+        </div>
+    </section>
+
+    <!-- SCREEN 6: REACTION -->
+    <section id="screen-reaction" class="screen">
+        <div class="reaction-content">
+            <p class="reaction-text line-1">Теперь, когда ты познакомилась со всеми маршрутами,</p>
+            <p class="reaction-text line-2">выбери тот, который нравится больше <span class="emoji-smile">😊</span></p>
+            <button class="btn-primary" id="btn-reaction-next">Выбрать вариант</button>
+        </div>
+    </section>
+
+    <!-- SCREEN 7: FINAL -->
+    <section id="screen-final" class="screen">
+        <div class="final-content">
+            <div class="tabs">
+                <button class="tab active" data-tab="ready">Готовые маршруты</button>
+                <button class="tab" data-tab="custom">Собрать свой</button>
+            </div>
+
+            <!-- TAB 1: READY ROUTES -->
+            <div class="tab-content active" id="tab-ready">
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="route" value="silence">
+                        <div class="radio-label">
+                            <strong>Тишина</strong>
+                            <span>Линдуловская роща → Aster</span>
+                        </div>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="route" value="movement">
+                        <div class="radio-label">
+                            <strong>Движение</strong>
+                            <span>Каток у Флагштока → Aster</span>
+                        </div>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="route" value="light">
+                        <div class="radio-label">
+                            <strong>Свет</strong>
+                            <span>Пьер и Сильфиды → Aster → Анненкирхе (22:30)</span>
+                        </div>
+                    </label>
+                </div>
+                <button class="btn-telegram" id="btn-telegram-ready" disabled>Написать в Telegram</button>
+            </div>
+
+            <!-- TAB 2: CUSTOM ROUTE -->
+            <div class="tab-content" id="tab-custom">
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="checkbox" value="Линдуловская роща">
+                        <span>Линдуловская роща</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" value="Лахта-центр (смотровая)">
+                        <span>Лахта-центр (смотровая)</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" value="Исаакиевский собор (колоннада)">
+                        <span>Исаакиевский собор (колоннада)</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" value="Каток у Флагштока">
+                        <span>Каток у Флагштока</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" value="Пьер и Сильфиды">
+                        <span>Пьер и Сильфиды</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" value="Анненкирхе (22:30)">
+                        <span>Анненкирхе (22:30)</span>
+                    </label>
+                    <label class="checkbox-option disabled">
+                        <input type="checkbox" value="Aster" checked disabled>
+                        <span>Aster <small>(обязательно)</small></span>
+                    </label>
+                </div>
+                <button class="btn-telegram" id="btn-telegram-custom" disabled>Написать в Telegram</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
