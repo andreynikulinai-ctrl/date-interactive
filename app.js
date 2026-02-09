@@ -294,6 +294,30 @@ function createStoryAnimation(mood) {
         svg.appendChild(mist1);
         
         container.appendChild(svg);
+    } else if (mood === 'movement') {
+        // Ice rink traces animation
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('class', 'skate-animation');
+        svg.setAttribute('viewBox', '0 0 800 600');
+        
+        const tracePaths = [
+            'M -50 430 Q 200 360 420 400 T 900 360',
+            'M -80 470 Q 120 520 320 470 T 820 520',
+            'M -60 320 Q 160 260 380 300 T 900 260',
+            'M -100 560 Q 180 600 360 560 T 900 600',
+            'M -40 380 Q 220 330 420 360 T 900 320',
+            'M -70 520 Q 200 480 360 520 T 880 480'
+        ];
+        
+        tracePaths.forEach((d, i) => {
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('class', 'skate-trace');
+            path.setAttribute('d', d);
+            path.style.animationDelay = `${i * 0.6}s`;
+            svg.appendChild(path);
+        });
+        
+        container.appendChild(svg);
     }
 }
 
@@ -340,10 +364,7 @@ function createRouteAnimation(mood) {
 
 // Screen 1: Intro -> Weather
 document.getElementById('btn-start').addEventListener('click', () => {
-    // Добавляем задержку в 2 секунды перед переходом
-    setTimeout(() => {
-        transitionTo('screen-weather');
-    }, 2000);
+    transitionTo('screen-weather');
 });
 
 // Screen 2: Weather -> Mood
