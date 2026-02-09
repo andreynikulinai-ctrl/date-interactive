@@ -254,6 +254,13 @@ html, body {
     cursor: not-allowed;
 }
 
+.weather-widget .btn-primary,
+.story-content .btn-primary,
+.route-content .btn-primary,
+.reaction-content .btn-primary {
+    margin-top: auto;
+}
+
 /* ========== SCREEN 0: PRELOAD ========== */
 .preload-content {
     text-align: center;
@@ -364,6 +371,9 @@ html, body {
     max-width: 400px;
     width: 100%;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .weather-header h3 {
@@ -573,6 +583,9 @@ html, body {
     text-align: center;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .story-animation-bg {
@@ -615,6 +628,9 @@ html, body {
     width: 100%;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .route-animation-bg {
@@ -738,6 +754,9 @@ html, body {
 /* ========== SCREEN 7: REACTION ========== */
 .reaction-content {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .reaction-text {
@@ -862,6 +881,29 @@ html, body {
         font-size: 0.95rem;
         padding: var(--spacing-sm);
         text-align: center;
+    }
+
+    .tab-content {
+        padding-bottom: calc(var(--spacing-lg) + 56px);
+    }
+
+    #screen-final .btn-telegram {
+        position: sticky;
+        bottom: var(--spacing-md);
+        width: 100%;
+        margin-top: var(--spacing-sm);
+        padding: 0.9rem 1.2rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .weather-widget,
+    .story-content,
+    .route-content,
+    .reaction-content {
+        min-height: 60vh;
+        padding-bottom: var(--spacing-md);
     }
 }
 
