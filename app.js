@@ -613,32 +613,45 @@ btnTelegramCustom.addEventListener('click', () => {
 
 // ==================== VIDEO MANAGEMENT ====================
 
-/* Video play button for Safari */
-.video-play-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
+function startVideo(videoId, videoSrc) {
+    const video = document.getElementById(videoId);
+    if (!video) return;
     
-    padding: 1.5rem 3rem;
-    font-size: 1.2rem;
-    font-family: var(--font-body);
+    // Set source if not already set
+    const source = video.querySelector('source');
+    if (!source.src) {
+        source.src = videoSrc;
+        video.load();
+    }
     
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50px;
-    color: white;
-    
-    cursor: pointer;
-    transition: all 0.3s ease;
+    // Try to play with Safari fallback
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+        playPromise
+            .then(() => {
+                console.log(`Video ${videoId} playback started`);
+            })
+            .catch(error => {
+                console.log(`Autoplay blocked for ${videoId}, showing play button`);
+                // Safari blocked autoplay - show play button
+                showVideoPlayButton(video);
+            });
+    }
 }
 
-.video-play-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translate(-50%, -50%) scale(1.05);
+// Show play button for Safari
+function showVideoPlayButton(video) {
+    const container = video.parentElement;
+    const playBtn = document.createElement('button');
+    playBtn.className = 'video-play-btn';
+    playBtn.innerHTML = '▶ Посмотреть видео';
+    playBtn.onclick = () => {
+        video.play();
+        playBtn.remove();
+    };
+    container.appendChild(playBtn);
 }
+
 function stopAllVideos() {
     const videos = ['silenceVideo', 'movementVideo', 'lightVideo'];
     videos.forEach(videoId => {
