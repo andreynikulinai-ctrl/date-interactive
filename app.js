@@ -209,8 +209,6 @@ function triggerScreenAnimations(screenId) {
             break;
         case 'screen-reaction':
             animateReaction();
-            // Stop all videos when leaving route screen
-            stopAllVideos();
             break;
     }
 }
@@ -304,58 +302,37 @@ function createRouteAnimation(mood) {
     container.innerHTML = '';
     
     if (mood === 'silence') {
-        // Forest video background
-        const videoHTML = `
+        // Forest animated WEBP background
+        const imageHTML = `
             <div class="sceneVideo">
-                <video id="silenceVideo" 
-                       autoplay 
-                       muted 
-                       loop 
-                       playsinline 
-                       preload="none"
-                       poster="assets/video/silence-forest.jpg">
-                    <source src="" type="video/mp4">
-                </video>
+                <img class="route-bg-animation" 
+                     src="assets/video/silence-forest.webp" 
+                     alt="">
             </div>
         `;
-        container.innerHTML = videoHTML;
-        startVideo('silenceVideo', 'assets/video/silence-forest.mp4');
+        container.innerHTML = imageHTML;
         
     } else if (mood === 'movement') {
-        // Ice rink VIDEO background
-        const videoHTML = `
+        // Ice rink animated WEBP background
+        const imageHTML = `
             <div class="sceneVideo">
-                <video id="movementVideo" 
-                       autoplay 
-                       muted 
-                       loop 
-                       playsinline 
-                       preload="none"
-                       poster="assets/video/movement-rink.jpg">
-                    <source src="" type="video/mp4">
-                </video>
+                <img class="route-bg-animation" 
+                     src="assets/video/movement-rink.webp" 
+                     alt="">
             </div>
         `;
-        container.innerHTML = videoHTML;
-        startVideo('movementVideo', 'assets/video/movement-rink.mp4');
+        container.innerHTML = imageHTML;
         
     } else if (mood === 'light') {
-        // Concert/light video background
-        const videoHTML = `
+        // Concert/light animated WEBP background
+        const imageHTML = `
             <div class="sceneVideo">
-                <video id="lightVideo" 
-                       autoplay 
-                       muted 
-                       loop 
-                       playsinline 
-                       preload="none"
-                       poster="assets/video/light-concert.jpg">
-                    <source src="" type="video/mp4">
-                </video>
+                <img class="route-bg-animation" 
+                     src="assets/video/light-concert.webp" 
+                     alt="">
             </div>
         `;
-        container.innerHTML = videoHTML;
-        startVideo('lightVideo', 'assets/video/light-concert.mp4');
+        container.innerHTML = imageHTML;
     }
 }
 
@@ -610,62 +587,6 @@ btnTelegramCustom.addEventListener('click', () => {
     const url = `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
 });
-
-// ==================== VIDEO MANAGEMENT ====================
-
-function startVideo(videoId, videoSrc) {
-    const video = document.getElementById(videoId);
-    if (!video) return;
-    
-    // Set source if not already set
-    const source = video.querySelector('source');
-    if (!source.src) {
-        source.src = videoSrc;
-        video.load();
-    }
-    
-    // Try to play with Safari fallback
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-        playPromise
-            .then(() => {
-                console.log(`Video ${videoId} playback started`);
-            })
-            .catch(error => {
-                console.log(`Autoplay blocked for ${videoId}, showing play button`);
-                // Safari blocked autoplay - show play button
-                showVideoPlayButton(video);
-            });
-    }
-}
-
-// Show play button for Safari
-function showVideoPlayButton(video) {
-    const container = video.parentElement;
-    const playBtn = document.createElement('button');
-    playBtn.className = 'video-play-btn';
-    playBtn.innerHTML = '▶ Посмотреть видео';
-    playBtn.onclick = () => {
-        video.play();
-        playBtn.remove();
-    };
-    container.appendChild(playBtn);
-}
-
-function stopAllVideos() {
-    const videos = ['silenceVideo', 'movementVideo', 'lightVideo'];
-    videos.forEach(videoId => {
-        const video = document.getElementById(videoId);
-        if (video) {
-            video.pause();
-            const source = video.querySelector('source');
-            if (source) {
-                source.src = '';
-            }
-            video.load();
-        }
-    });
-}
 
 // ==================== OVERLAY EFFECTS ====================
 
