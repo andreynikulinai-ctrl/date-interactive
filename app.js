@@ -329,7 +329,7 @@ function createRouteAnimation(mood) {
         // Forest animated GIF background
         const imageHTML = `
             <div class="sceneVideo">
-                <img class="route-bg-animation route-bg-silence" 
+                <img class="route-bg-animation" 
                      src="assets/video/silence-forest.gif" 
                      alt="">
             </div>
@@ -340,7 +340,7 @@ function createRouteAnimation(mood) {
         // Ice rink animated GIF background
         const imageHTML = `
             <div class="sceneVideo">
-                <img class="route-bg-animation route-bg-movement" 
+                <img class="route-bg-animation" 
                      src="assets/video/movement-rink.gif" 
                      alt="">
             </div>
@@ -351,7 +351,7 @@ function createRouteAnimation(mood) {
         // Concert/light animated GIF background
         const imageHTML = `
             <div class="sceneVideo">
-                <img class="route-bg-animation route-bg-light" 
+                <img class="route-bg-animation" 
                      src="assets/video/light-concert.gif" 
                      alt="">
             </div>
