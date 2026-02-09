@@ -302,33 +302,33 @@ function createRouteAnimation(mood) {
     container.innerHTML = '';
     
     if (mood === 'silence') {
-        // Forest animated WEBP background
+        // Forest animated GIF background
         const imageHTML = `
             <div class="sceneVideo">
                 <img class="route-bg-animation" 
-                     src="assets/video/silence-forest.webp" 
+                     src="assets/video/silence-forest.gif" 
                      alt="">
             </div>
         `;
         container.innerHTML = imageHTML;
         
     } else if (mood === 'movement') {
-        // Ice rink animated WEBP background
+        // Ice rink animated GIF background
         const imageHTML = `
             <div class="sceneVideo">
                 <img class="route-bg-animation" 
-                     src="assets/video/movement-rink.webp" 
+                     src="assets/video/movement-rink.gif" 
                      alt="">
             </div>
         `;
         container.innerHTML = imageHTML;
         
     } else if (mood === 'light') {
-        // Concert/light animated WEBP background
+        // Concert/light animated GIF background
         const imageHTML = `
             <div class="sceneVideo">
                 <img class="route-bg-animation" 
-                     src="assets/video/light-concert.webp" 
+                     src="assets/video/light-concert.gif" 
                      alt="">
             </div>
         `;
