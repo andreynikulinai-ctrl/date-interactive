@@ -1184,13 +1184,6 @@ html, body {
         transform: translate(-50%, -50%) scale(0.9);
         opacity: 0.25;
     }
-    .route-bg-animation.route-bg-light {
-        object-position: center 20%;
-        transform: translate(-50%, -50%) scale(0.8);
-    }
-    .sceneVideo {
-        background: #000;
-    }
 }
 
 /* Silence: Forest Animation (legacy fallback) */
