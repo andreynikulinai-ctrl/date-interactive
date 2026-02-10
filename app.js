@@ -248,6 +248,8 @@ function checkFontsLoaded() {
 async function preload() {
     try {
         await checkFontsLoaded();
+        // Preload route media in the background for smoother transitions
+        preloadRouteMedia();
         await new Promise(resolve => setTimeout(resolve, 2000)); // Минимальное время показа
         preloadComplete = true;
         showScreen('screen-intro');
@@ -256,6 +258,19 @@ async function preload() {
         preloadComplete = true;
         showScreen('screen-intro');
     }
+}
+
+function preloadRouteMedia() {
+    const assets = [
+        'assets/video/silence-forest.gif',
+        'assets/video/movement-rink.gif',
+        'assets/video/light-concert.gif'
+    ];
+    
+    assets.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+    });
 }
 
 // ==================== ANIMATIONS ====================
